@@ -850,7 +850,7 @@ class GoldLayer(DatabaseManager):
 
         self.build_finance_gold()
 
-        self.build_insurance_gold
+        self.build_insurance_gold()
 
         self.build_operations_gold()
 

@@ -36,7 +36,10 @@ DATABASE_URI = f"sqlite:///{DATABASE_PATH}"
 # -----------------------------
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-MODEL_NAME = "deepseek/deepseek-chat-v3-0324"
+MODEL_NAME = os.getenv(
+    "MODEL_NAME",
+    "deepseek/deepseek-chat-v3-0324"
+)
 
 # -----------------------------
 # App
