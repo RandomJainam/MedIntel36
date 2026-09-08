@@ -4,6 +4,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 title MedIntel360 Setup
 
 cd /d "%~dp0"
+set "PYTHONPATH=%CD%;%PYTHONPATH%"
 
 echo.
 echo ============================================================
