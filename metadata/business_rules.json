@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+
+  "rules": [
+
+    {
+      "id": "exclude_cancelled_admissions",
+      "title": "Exclude Cancelled Admissions",
+      "description": "Analytics should ignore cancelled admissions unless explicitly requested by the user.",
+      "datasets": ["patient", "finance", "operations"],
+      "rule_type": "filter",
+      "condition": "admission_status != 'Cancelled'"
+    },
+
+    {
+      "id": "positive_revenue",
+      "title": "Revenue Must Be Non-negative",
+      "description": "Revenue values should never be negative.",
+      "datasets": ["finance"],
+      "rule_type": "validation",
+      "condition": "total_amount >= 0"
+    },
+
+    {
+      "id": "valid_age",
+      "title": "Valid Patient Age",
+      "description": "Patient age cannot be negative.",
+      "datasets": ["patient"],
+      "rule_type": "validation",
+      "condition": "age >= 0"
+    },
+
+    {
+      "id": "valid_length_of_stay",
+      "title": "Valid Length of Stay",
+      "description": "Length of stay cannot be negative.",
+      "datasets": ["patient"],
+      "rule_type": "validation",
+      "condition": "los >= 0"
+    },
+
+    {
+      "id": "discharge_after_admission",
+      "title": "Discharge After Admission",
+      "description": "Discharge date must not be earlier than admission date.",
+      "datasets": ["patient"],
+      "rule_type": "validation",
+      "condition": "discharge_date >= admission_date"
+    },
+
+    {
+      "id": "default_date_dimension",
+      "title": "Default Date Column",
+      "description": "Use admission_date as the default date dimension when the user does not specify one.",
+      "datasets": ["patient", "finance", "operations", "medical"],
+      "rule_type": "default",
+      "value": "admission_date"
+    },
+
+    {
+      "id": "default_sort_order",
+      "title": "Default Sorting",
+      "description": "Sort date-based results in ascending order unless the user specifies otherwise.",
+      "datasets": ["patient", "finance", "operations", "medical"],
+      "rule_type": "default",
+      "value": "ORDER BY admission_date ASC"
+    },
+
+    {
+      "id": "default_result_limit",
+      "title": "Default Result Limit",
+      "description": "Limit query results when no explicit limit is requested.",
+      "datasets": ["patient", "finance", "operations", "medical"],
+      "rule_type": "default",
+      "value": 100
+    }
+
+  ]
+}

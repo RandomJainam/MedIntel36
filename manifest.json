@@ -1,0 +1,9 @@
+{
+    "project_name": "MedIntel360",
+    "version": "1.0.0",
+    "author": "Jainam Gada",
+    "python_version": "3.11",
+    "requirements": "requirements.txt",
+    "entry_point": "dashboard/Home.py",
+    "venv": ".venv"
+}

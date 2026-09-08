@@ -1,0 +1,11 @@
+streamlit
+pandas
+numpy
+sqlalchemy
+python-dotenv
+duckdb
+plotly
+scikit-learn
+mlxtend
+requests
+reportlab

@@ -1,0 +1,221 @@
+{
+  "project": {
+    "name": "MedIntel360",
+    "description": "AI Metadata Catalog for MedIntel360",
+    "version": "1.0.0"
+  },
+
+  "defaults": {
+    "default_dataset": "patient",
+    "default_limit": 100,
+    "default_order": "DESC",
+    "date_format": "YYYY-MM-DD",
+    "currency": "INR"
+  },
+
+  "dataset_directory": "datasets",
+
+  "datasets": [
+    {
+      "id": "patient",
+      "name": "Patient Analytics",
+      "description": "Patient demographics, admissions, LOS, revenue, segmentation and patient analytics.",
+
+      "table": "gold_patient_analytics",
+
+      "metadata_file": "datasets/patient_dataset.json",
+
+      "priority": 1,
+
+      "enabled": true,
+
+      "search_weight": 100,
+
+      "tags": [
+        "patient",
+        "admission",
+        "demographics",
+        "length_of_stay",
+        "los",
+        "revenue",
+        "disease"
+      ],
+
+      "supported_operations": [
+        "select",
+        "aggregate",
+        "group_by",
+        "filter",
+        "sort"
+      ]
+    },
+
+    {
+      "id": "finance",
+
+      "name": "Finance Analytics",
+
+      "description": "Hospital revenue, billing, insurance, collections and financial performance.",
+
+      "table": "gold_finance_analytics",
+
+      "metadata_file": "datasets/finance_dataset.json",
+
+      "priority": 2,
+
+      "enabled": true,
+
+      "search_weight": 95,
+
+      "tags": [
+        "finance",
+        "billing",
+        "revenue",
+        "insurance",
+        "payments",
+        "profit"
+      ],
+
+      "supported_operations": [
+        "select",
+        "aggregate",
+        "group_by",
+        "filter",
+        "sort"
+      ]
+    },
+
+    {
+      "id": "operations",
+
+      "name": "Operations Analytics",
+
+      "description": "Hospital operational analytics including wards, beds, occupancy and staffing.",
+
+      "table": "gold_operations_analytics",
+
+      "metadata_file": "datasets/operations_dataset.json",
+
+      "priority": 3,
+
+      "enabled": true,
+
+      "search_weight": 90,
+
+      "tags": [
+        "operations",
+        "beds",
+        "ward",
+        "occupancy",
+        "staff",
+        "doctor",
+        "nurse"
+      ],
+
+      "supported_operations": [
+        "select",
+        "aggregate",
+        "group_by",
+        "filter",
+        "sort"
+      ]
+    },
+
+    {
+      "id": "medical",
+
+      "name": "Medical Analytics",
+
+      "description": "Clinical analytics including diseases, doctors, drugs and diagnostics.",
+
+      "table": "gold_medical_analytics",
+
+      "metadata_file": "datasets/medical_dataset.json",
+
+      "priority": 4,
+
+      "enabled": true,
+
+      "search_weight": 90,
+
+      "tags": [
+        "medical",
+        "clinical",
+        "doctor",
+        "diagnosis",
+        "disease",
+        "drug",
+        "prescription",
+        "test"
+      ],
+
+      "supported_operations": [
+        "select",
+        "aggregate",
+        "group_by",
+        "filter",
+        "sort"
+      ]
+    }
+  ],
+
+  "routing_rules": {
+    "patient": [
+      "patient",
+      "admission",
+      "los",
+      "age",
+      "gender",
+      "city",
+      "segment",
+      "risk"
+    ],
+
+    "finance": [
+      "billing",
+      "bill",
+      "payment",
+      "revenue",
+      "insurance",
+      "income",
+      "collection",
+      "profit"
+    ],
+
+    "operations": [
+      "bed",
+      "ward",
+      "occupancy",
+      "staff",
+      "resource",
+      "capacity",
+      "shift"
+    ],
+
+    "medical": [
+      "doctor",
+      "disease",
+      "diagnosis",
+      "medicine",
+      "drug",
+      "laboratory",
+      "test",
+      "prescription"
+    ]
+  },
+
+  "global_settings": {
+
+    "allow_cross_dataset_queries": true,
+
+    "allow_multi_table_join": false,
+
+    "allow_generated_metrics": true,
+
+    "enable_query_templates": true,
+
+    "enable_synonym_matching": true,
+
+    "enable_glossary_lookup": true
+  }
+}

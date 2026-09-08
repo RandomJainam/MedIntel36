@@ -1,0 +1,150 @@
+{
+  "version": "1.0.0",
+
+  "synonyms": [
+
+    {
+      "canonical_term": "Revenue",
+      "aliases": [
+        "revenue",
+        "income",
+        "earning",
+        "earnings",
+        "billing",
+        "bill amount",
+        "hospital revenue",
+        "sales",
+        "collection",
+        "collections",
+        "turnover"
+      ]
+    },
+
+    {
+      "canonical_term": "Length of Stay",
+      "aliases": [
+        "los",
+        "length of stay",
+        "stay",
+        "hospital stay",
+        "stay duration",
+        "days admitted",
+        "admission duration"
+      ]
+    },
+
+    {
+      "canonical_term": "Patient",
+      "aliases": [
+        "patient",
+        "patients",
+        "person",
+        "individual",
+        "customer"
+      ]
+    },
+
+    {
+      "canonical_term": "Admission",
+      "aliases": [
+        "admission",
+        "hospitalization",
+        "hospitalisation",
+        "visit",
+        "admit",
+        "case"
+      ]
+    },
+
+    {
+      "canonical_term": "Department",
+      "aliases": [
+        "department",
+        "unit",
+        "hospital department",
+        "medical department"
+      ]
+    },
+
+    {
+      "canonical_term": "Disease",
+      "aliases": [
+        "disease",
+        "diagnosis",
+        "condition",
+        "illness",
+        "problem"
+      ]
+    },
+
+    {
+      "canonical_term": "Doctor",
+      "aliases": [
+        "doctor",
+        "physician",
+        "consultant",
+        "medical officer",
+        "specialist"
+      ]
+    },
+
+    {
+      "canonical_term": "City",
+      "aliases": [
+        "city",
+        "location",
+        "town",
+        "place"
+      ]
+    },
+
+    {
+      "canonical_term": "Gender",
+      "aliases": [
+        "gender",
+        "sex"
+      ]
+    },
+
+    {
+      "canonical_term": "Age",
+      "aliases": [
+        "age",
+        "patient age",
+        "years"
+      ]
+    },
+
+    {
+      "canonical_term": "Insurance Coverage",
+      "aliases": [
+        "insurance",
+        "covered amount",
+        "insurance amount",
+        "claim",
+        "claim amount"
+      ]
+    },
+
+    {
+      "canonical_term": "Bed Occupancy",
+      "aliases": [
+        "occupancy",
+        "bed occupancy",
+        "bed utilization",
+        "bed usage",
+        "occupancy rate"
+      ]
+    },
+
+    {
+      "canonical_term": "Patient Segment",
+      "aliases": [
+        "segment",
+        "patient segment",
+        "category",
+        "classification"
+      ]
+    }
+  ]
+}

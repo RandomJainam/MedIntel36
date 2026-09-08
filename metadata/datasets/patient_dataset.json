@@ -1,0 +1,299 @@
+{
+  "dataset_info": {
+    "id": "patient",
+    "name": "Patient Analytics",
+    "description": "Patient demographics, admissions and hospitalization analytics.",
+    "table": "gold_patient_analytics",
+    "grain": "One record per patient admission",
+    "primary_key": "admission_id",
+    "owner": "MedIntel360",
+    "version": "1.0.0"
+  },
+
+  "physical_schema": {
+    "columns": [
+        {
+            "name": "patient_id",
+            "datatype": "INTEGER",
+            "nullable": false
+        },
+        {
+            "name": "admission_id",
+            "datatype": "INTEGER",
+            "nullable": false
+        },
+        {
+            "name": "department_name",
+            "datatype": "TEXT",
+            "nullable": true
+        },
+        {
+            "name": "city",
+            "datatype": "TEXT",
+            "nullable": true
+        },
+        {
+            "name": "los",
+            "datatype": "REAL",
+            "nullable": true
+        },
+        {
+            "name": "total_amount",
+            "datatype": "REAL",
+            "nullable": true
+        }
+    ],
+
+    "indexes": [
+        "patient_id",
+        "admission_id",
+        "admission_date",
+        "department_name"
+    ],
+
+    "foreign_keys": []
+},
+  "dimensions": [
+    {
+      "name": "city",
+      "display_name": "City",
+      "description": "Patient residential city.",
+      "aliases": ["town", "location", "district"],
+      "datatype": "TEXT",
+      "filterable": true,
+      "groupable": true,
+      "sortable": true,
+      "search_weight": 90,
+      "example_values": ["Mumbai", "Delhi", "Pune"]
+    },
+    {
+      "name": "department_name",
+      "display_name": "Department",
+      "description": "Hospital department responsible for treating the patient.",
+      "aliases": [
+        "department",
+        "hospital department",
+        "unit"
+      ],
+      "datatype": "TEXT",
+      "filterable": true,
+      "groupable": true,
+      "sortable": true,
+      "search_weight": 95,
+      "example_values": [
+        "Cardiology",
+        "Neurology",
+        "Orthopedics"
+      ]
+    },
+    {
+      "name": "gender",
+      "display_name": "Gender",
+      "description": "Gender of the patient.",
+      "aliases": [
+        "sex"
+      ],
+      "datatype": "TEXT",
+      "filterable": true,
+      "groupable": true,
+      "sortable": true,
+      "search_weight": 90,
+      "example_values": [
+        "Male",
+        "Female"
+      ]
+    },
+    {
+      "name": "age",
+      "display_name": "Age",
+      "description": "Age of the patient in completed years.",
+      "aliases": [
+        "patient age"
+      ],
+      "datatype": "INTEGER",
+      "filterable": true,
+      "groupable": true,
+      "sortable": true,
+      "search_weight": 90,
+      "example_values": [
+        18,
+        35,
+        62
+      ]
+    },
+   {
+    "name": "disease_name",
+    "display_name": "Disease",
+    "description": "Primary diagnosed disease during admission.",
+    "aliases": [
+        "diagnosis",
+        "illness",
+        "condition"
+    ],
+    "datatype": "TEXT",
+    "filterable": true,
+    "groupable": true,
+    "sortable": true,
+    "search_weight": 95,
+    "example_values": [
+        "Diabetes",
+        "Hypertension",
+        "Pneumonia"
+    ]
+},
+   {
+    "name": "patient_segment",
+    "display_name": "Patient Segment",
+    "description": "Business classification of patients based on predefined segmentation rules.",
+    "aliases": [
+        "segment",
+        "patient category"
+    ],
+    "datatype": "TEXT",
+    "filterable": true,
+    "groupable": true,
+    "sortable": true,
+    "search_weight": 85,
+    "example_values": [
+        "Premium",
+        "Regular",
+        "High Risk"
+    ]
+}
+],
+
+ "metrics": [
+    {
+        "name": "total_amount",
+        "display_name": "Revenue",
+        "description": "Revenue generated from a patient admission.",
+
+        "datatype": "REAL",
+
+        "default_aggregation": "SUM",
+
+        "unit": "INR",
+
+        "aliases": [
+            "revenue",
+            "income",
+            "sales",
+            "billing"
+        ],
+
+        "display_format": "currency",
+
+        "search_weight": 100,
+
+        "sortable": true
+    },
+
+    {
+        "name": "los",
+        "display_name": "Length of Stay",
+
+        "description": "Number of days patient stayed in hospital.",
+
+        "datatype": "REAL",
+
+        "default_aggregation": "AVG",
+
+        "unit": "Days",
+
+        "aliases": [
+            "length of stay",
+            "stay duration",
+            "hospital stay"
+        ],
+
+        "display_format": "number",
+
+        "search_weight": 95,
+
+        "sortable": true
+    }
+],
+
+  "relationships": {
+    "joins": [
+      {
+        "dataset": "finance",
+        "column": "admission_id",
+        "type": "one_to_one"
+      },
+      {
+        "dataset": "medical",
+        "column": "patient_id",
+        "type": "one_to_many"
+      }
+    ],
+    "shared_dimensions": [],
+    "related_datasets": []
+  },
+
+  "filters": {
+    "filterable_columns": [
+      "city",
+      "department_name",
+      "gender",
+      "age",
+      "disease_name",
+      "patient_segment"
+    ]
+  },
+
+  "sorting": {
+    "default_sort": {
+      "column": "admission_date",
+      "order": "DESC"
+    },
+    "sortable_columns": ["admission_date", "los", "total_amount"]
+  },
+
+  "time_intelligence": {
+    "default_date_column": "admission_date",
+    "supported_granularity": ["day", "week", "month", "quarter", "year"],
+    "fiscal_year_start": "April"
+  },
+
+  "default_visualizations": [
+    {
+      "metric": "total_amount",
+      "dimension": "department_name",
+      "chart": "bar"
+    },
+    {
+      "metric": "los",
+      "dimension": "disease_name",
+      "chart": "box"
+    },
+    {
+      "metric": "patient_count",
+      "dimension": "admission_date",
+      "chart": "line"
+    }
+  ],
+
+  "ai_context": {
+    "summary": "Dataset focuses on patient admissions and hospitalization.",
+    "preferred_metrics": ["patient_count", "los", "total_amount"],
+    "preferred_dimensions": ["department_name", "city", "disease_name"],
+    "business_goal": "Analyze patient flow and revenue."
+  },
+
+  "sample_questions": [
+    "Top cities by revenue",
+    "Average LOS by disease",
+    "Monthly admissions",
+    "Department revenue",
+    "Patient segmentation",
+    "Risk distribution"
+  ],
+
+  "business_notes": [
+    "Each row represents one admission.",
+    "Revenue is calculated per admission.",
+    "LOS is measured in days.",
+    "Patient IDs may repeat across admissions."
+  ]
+}

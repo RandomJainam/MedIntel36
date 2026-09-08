@@ -1,0 +1,225 @@
+{
+  "version": "1.0.0",
+
+  "terms": [
+
+    {
+      "term": "Patient",
+
+      "definition": "An individual receiving medical care from the hospital.",
+
+      "category": "Entity",
+
+      "datasets": [
+        "patient",
+        "medical",
+        "finance"
+      ],
+
+      "related_columns": [
+        "patient_id"
+      ]
+    },
+
+    {
+      "term": "Admission",
+
+      "definition": "A single hospital visit during which a patient is admitted for treatment.",
+
+      "category": "Entity",
+
+      "datasets": [
+        "patient",
+        "operations",
+        "medical"
+      ],
+
+      "related_columns": [
+        "admission_id",
+        "admission_date"
+      ]
+    },
+
+    {
+      "term": "Length of Stay",
+
+      "definition": "Total number of days a patient remains admitted in the hospital.",
+
+      "category": "KPI",
+
+      "datasets": [
+        "patient"
+      ],
+
+      "related_columns": [
+        "los"
+      ],
+
+      "default_aggregation": "AVG",
+
+      "unit": "Days"
+    },
+
+    {
+      "term": "Revenue",
+
+      "definition": "Total billed amount generated from a patient admission.",
+
+      "category": "Financial KPI",
+
+      "datasets": [
+        "finance",
+        "patient"
+      ],
+
+      "related_columns": [
+        "total_amount"
+      ],
+
+      "default_aggregation": "SUM",
+
+      "unit": "INR"
+    },
+
+    {
+      "term": "Department",
+
+      "definition": "Hospital unit responsible for treating the patient.",
+
+      "category": "Dimension",
+
+      "datasets": [
+        "patient",
+        "operations",
+        "finance"
+      ],
+
+      "related_columns": [
+        "department_name"
+      ]
+    },
+
+    {
+      "term": "Disease",
+
+      "definition": "Primary diagnosis assigned to a patient during an admission.",
+
+      "category": "Medical",
+
+      "datasets": [
+        "patient",
+        "medical"
+      ],
+
+      "related_columns": [
+        "disease_name"
+      ]
+    },
+
+    {
+      "term": "Ward",
+
+      "definition": "Hospital section where a patient is accommodated during admission.",
+
+      "category": "Operations",
+
+      "datasets": [
+        "operations"
+      ],
+
+      "related_columns": [
+        "ward_name"
+      ]
+    },
+
+    {
+      "term": "Bed Occupancy",
+
+      "definition": "Percentage of hospital beds occupied during a specific period.",
+
+      "category": "Operations KPI",
+
+      "datasets": [
+        "operations"
+      ],
+
+      "related_columns": [
+        "ward_occupancy_rate"
+      ],
+
+      "default_aggregation": "AVG",
+
+      "unit": "%"
+    },
+
+    {
+      "term": "Insurance Coverage",
+
+      "definition": "Portion of the hospital bill paid by the insurance provider.",
+
+      "category": "Financial KPI",
+
+      "datasets": [
+        "finance"
+      ],
+
+      "related_columns": [
+        "insurance_covered_amount"
+      ],
+
+      "default_aggregation": "SUM",
+
+      "unit": "INR"
+    },
+
+    {
+      "term": "Doctor",
+
+      "definition": "Medical professional responsible for diagnosis and treatment.",
+
+      "category": "Medical",
+
+      "datasets": [
+        "medical"
+      ],
+
+      "related_columns": [
+        "doctor_id",
+        "employee_name"
+      ]
+    },
+
+    {
+      "term": "Patient Segment",
+
+      "definition": "Business classification assigned to a patient based on predefined rules.",
+
+      "category": "Business",
+
+      "datasets": [
+        "patient"
+      ],
+
+      "related_columns": [
+        "patient_segment"
+      ]
+    },
+
+    {
+      "term": "Risk Level",
+
+      "definition": "Clinical or business risk classification assigned to a patient.",
+
+      "category": "Business",
+
+      "datasets": [
+        "patient"
+      ],
+
+      "related_columns": [
+        "patient_risk_level"
+      ]
+    }
+
+  ]
+}

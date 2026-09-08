@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment Variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python cache
+.pytest_cache/
+
+# Streamlit cache
+.streamlit/
+
+# Logs (optional)
+*.log
+
+database/*.db
+*.db
+# Generated / local datasets
+data/gold/*.csv
+
+# Generated data layers
+data/gold/
+data/processed/
+data/warehouse/
+data/feature_store/

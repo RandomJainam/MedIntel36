@@ -1,0 +1,124 @@
+{
+  "version": "1.0.0",
+
+  "templates": [
+
+    {
+      "id": "summary_metric",
+      "name": "Summary Metric",
+      "description": "Return a single aggregated metric.",
+
+      "examples": [
+        "Total revenue",
+        "Average length of stay",
+        "Patient count"
+      ],
+
+      "sql_pattern": "SELECT {metric} FROM {table}"
+    },
+
+    {
+      "id": "group_by_dimension",
+      "name": "Group By Dimension",
+      "description": "Aggregate a metric by a business dimension.",
+
+      "examples": [
+        "Revenue by department",
+        "Patients by city",
+        "Admissions by disease"
+      ],
+
+      "sql_pattern": "SELECT {dimension}, {metric} FROM {table} GROUP BY {dimension}"
+    },
+
+    {
+      "id": "time_series",
+      "name": "Time Series",
+      "description": "Show a metric over time.",
+
+      "examples": [
+        "Monthly revenue",
+        "Daily admissions",
+        "Revenue trend"
+      ],
+
+      "sql_pattern": "SELECT {date_column}, {metric} FROM {table} GROUP BY {date_column} ORDER BY {date_column}"
+    },
+
+    {
+      "id": "top_n",
+      "name": "Top N",
+
+      "description": "Return highest values.",
+
+      "examples": [
+        "Top 10 departments by revenue",
+        "Top diseases",
+        "Highest billing cities"
+      ],
+
+      "sql_pattern": "SELECT {dimension}, {metric} FROM {table} GROUP BY {dimension} ORDER BY {metric} DESC LIMIT {limit}"
+    },
+
+    {
+      "id": "bottom_n",
+      "name": "Bottom N",
+
+      "description": "Return lowest values.",
+
+      "examples": [
+        "Lowest revenue departments",
+        "Bottom 5 cities"
+      ],
+
+      "sql_pattern": "SELECT {dimension}, {metric} FROM {table} GROUP BY {dimension} ORDER BY {metric} ASC LIMIT {limit}"
+    },
+
+    {
+      "id": "filtered_query",
+      "name": "Filtered Query",
+
+      "description": "Apply one or more filters.",
+
+      "examples": [
+        "Revenue in Mumbai",
+        "Female patients",
+        "Cardiology admissions"
+      ],
+
+      "sql_pattern": "SELECT {columns} FROM {table} WHERE {filters}"
+    },
+
+    {
+      "id": "comparison",
+      "name": "Comparison",
+
+      "description": "Compare metric across categories.",
+
+      "examples": [
+        "Revenue by department",
+        "LOS by city",
+        "Patients by gender"
+      ],
+
+      "sql_pattern": "SELECT {dimension}, {metric} FROM {table} GROUP BY {dimension}"
+    },
+
+    {
+      "id": "multi_dataset",
+
+      "name": "Multi Dataset Join",
+
+      "description": "Retrieve information requiring multiple datasets.",
+
+      "examples": [
+        "Revenue by disease",
+        "Average LOS by doctor",
+        "Revenue by insurance type"
+      ],
+
+      "sql_pattern": "SELECT ... FROM {joins}"
+    }
+
+  ]
+}

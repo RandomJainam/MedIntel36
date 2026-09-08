@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+
+  "system_rules": {
+    "database": "SQLite",
+    "sql_dialect": "SQLite",
+    "allowed_operations": [
+      "SELECT"
+    ],
+    "forbidden_operations": [
+      "INSERT",
+      "UPDATE",
+      "DELETE",
+      "DROP",
+      "ALTER",
+      "CREATE",
+      "TRUNCATE",
+      "ATTACH",
+      "DETACH",
+      "PRAGMA"
+    ]
+  },
+
+  "query_defaults": {
+    "default_limit": 100,
+    "default_order": "ASC",
+    "default_date_column": "admission_date",
+    "null_handling": "IGNORE",
+    "use_distinct_when_required": true
+  },
+
+  "sql_generation": {
+    "qualify_columns": true,
+    "prefer_explicit_joins": true,
+    "avoid_select_star": true,
+    "always_alias_aggregates": true,
+    "use_table_aliases": true
+  },
+
+  "aggregation_rules": {
+    "default": "SUM",
+    "count_distinct": [
+      "patient_id"
+    ]
+  },
+
+  "ai_behavior": {
+    "infer_dataset": true,
+    "infer_metric": true,
+    "infer_dimension": true,
+    "infer_time_dimension": true,
+    "infer_filters": true,
+    "ask_clarification_if_ambiguous": true
+  },
+
+  "response_format": {
+    "return_sql_only": true,
+    "include_explanation": false,
+    "include_markdown": false
+  }
+}

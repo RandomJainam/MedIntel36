@@ -1,0 +1,56 @@
+{
+  "project": {
+    "name": "MedIntel360",
+    "description": "AI-Powered Healthcare Analytics Platform",
+    "organization": "Personal Project",
+    "author": "Jainam Gada"
+  },
+
+  "metadata": {
+    "version": "1.0.0",
+    "schema_version": "1.0.0",
+    "created_on": "2026-07-23",
+    "last_updated": "2026-07-23",
+    "status": "production"
+  },
+
+  "compatibility": {
+    "minimum_app_version": "1.0.0",
+    "database": "SQLite",
+    "supported_llms": [
+      "OpenAI",
+      "Anthropic",
+      "Google Gemini",
+      "OpenRouter Compatible Models"
+    ]
+  },
+
+  "datasets": {
+    "count": 4,
+    "directory": "datasets"
+  },
+
+  "metadata_files": {
+    "ai_catalog": "ai_catalog.json",
+    "glossary": "glossary.json",
+    "synonym_dictionary": "synonym_dictionary.json",
+    "calculated_metrics": "calculated_metrics.json",
+    "kpis": "kpis.json",
+    "relationships": "relationships.json",
+    "business_rules": "business_rules.json",
+    "query_templates": "query_templates.json",
+    "prompt_rules": "prompt_rules.json"
+  },
+
+  "features": {
+    "dataset_selection": true,
+    "business_glossary": true,
+    "synonym_resolution": true,
+    "calculated_metrics": true,
+    "kpi_library": true,
+    "relationship_mapping": true,
+    "business_rules": true,
+    "query_templates": true,
+    "llm_prompt_rules": true
+  }
+}

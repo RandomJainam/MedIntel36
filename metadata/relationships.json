@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+
+  "relationships": [
+
+    {
+      "id": "patient_finance",
+
+      "left_dataset": "patient",
+      "right_dataset": "finance",
+
+      "join_type": "INNER",
+
+      "join_condition": [
+        {
+          "left_column": "admission_id",
+          "right_column": "admission_id"
+        }
+      ],
+
+      "relationship": "one_to_one",
+
+      "description": "Connects patient admissions with financial records."
+    },
+
+    {
+      "id": "patient_medical",
+
+      "left_dataset": "patient",
+      "right_dataset": "medical",
+
+      "join_type": "INNER",
+
+      "join_condition": [
+        {
+          "left_column": "admission_id",
+          "right_column": "admission_id"
+        }
+      ],
+
+      "relationship": "one_to_one",
+
+      "description": "Connects patient demographics with medical diagnosis."
+    },
+
+    {
+      "id": "patient_operations",
+
+      "left_dataset": "patient",
+      "right_dataset": "operations",
+
+      "join_type": "INNER",
+
+      "join_condition": [
+        {
+          "left_column": "admission_id",
+          "right_column": "admission_id"
+        }
+      ],
+
+      "relationship": "one_to_one",
+
+      "description": "Connects patient admissions with operational records."
+    }
+
+  ]
+}

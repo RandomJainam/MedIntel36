@@ -1,0 +1,503 @@
+{
+    "dataset_info": {
+    "id": "finance",
+    "name": "Financial Analytics",
+    "description": "Financial and billing analytics for patient admissions, including revenue, insurance coverage, payment status, and departmental financial performance.",
+    "table": "gold_finance_analytics",
+    "table_type": "gold",
+    "grain": "One record per patient admission and billing transaction",
+    "primary_key": "bill_id",
+    "owner": "MedIntel360",
+    "version": "1.0.0"
+},
+"physical_schema": {
+    "columns": [
+        "admission_id",
+        "patient_id",
+        "department_id",
+        "ward_id",
+        "bed_id",
+        "disease_id",
+        "admission_date",
+        "discharge_date",
+        "admission_type",
+        "admission_status",
+        "los",
+        "bill_id",
+        "bill_date",
+        "total_amount",
+        "insurance_covered_amount",
+        "patient_payable_amount",
+        "payment_status",
+        "payment_mode",
+        "gender",
+        "date_of_birth",
+        "blood_group",
+        "city",
+        "contact_number",
+        "insurance_flag",
+        "age",
+        "age_group",
+        "admission_month",
+        "admission_quarter",
+        "admission_weekday",
+        "weekend_admission",
+        "revenue_per_day",
+        "revenue_category",
+        "long_stay_flag",
+        "high_revenue_flag",
+        "senior_citizen_flag",
+        "los_category",
+        "patient_payment_ratio",
+        "insurance_coverage_ratio",
+        "revenue_band",
+        "admission_season",
+        "department_name",
+        "department_type",
+        "floor_number",
+        "status",
+        "billing_detail_id",
+        "charge_type",
+        "reference_id",
+        "amount",
+        "policy_count",
+        "provider_count",
+        "average_coverage_percentage",
+        "maximum_coverage_percentage",
+        "multiple_policy_flag",
+        "average_revenue",
+        "department_total_revenue",
+        "department_revenue_rank",
+        "payment_completion_ratio",
+        "insurance_coverage_percentage",
+        "patient_payment_percentage",
+        "department_revenue_share",
+        "charge_type_count",
+        "high_coverage_flag",
+        "top_department_flag",
+        "payment_status_category",
+        "insurance_tier",
+        "financial_risk",
+        "department_performance",
+        "payment_priority"
+    ],
+
+    "indexes": [
+        "bill_id",
+        "admission_id",
+        "patient_id",
+        "department_id",
+        "bill_date",
+        "payment_status"
+    ],
+
+    "foreign_keys": []
+},
+"relationships": {
+    "joins": [
+        {
+            "dataset": "patient",
+            "local_column": "admission_id",
+            "remote_column": "admission_id",
+            "relationship": "one_to_one"
+        },
+        {
+            "dataset": "operations",
+            "local_column": "department_id",
+            "remote_column": "department_id",
+            "relationship": "many_to_one"
+        },
+        {
+            "dataset": "medical",
+            "local_column": "disease_id",
+            "remote_column": "disease_id",
+            "relationship": "many_to_one"
+        }
+    ]
+},
+"filters": {
+    "filterable_columns": [
+        "payment_status",
+        "payment_mode",
+        "insurance_flag",
+        "insurance_tier",
+        "financial_risk",
+        "department_name",
+        "department_type",
+        "revenue_band",
+        "charge_type",
+        "bill_date",
+        "admission_date",
+        "admission_month",
+        "admission_quarter",
+        "admission_season",
+        "payment_priority",
+        "payment_status_category"
+    ]
+},
+"sorting": {
+    "default_sort": {
+        "column": "bill_date",
+        "order": "DESC"
+    },
+    "sortable_columns": [
+        "bill_date",
+        "total_amount",
+        "average_revenue",
+        "department_total_revenue",
+        "department_revenue_rank",
+        "insurance_covered_amount",
+        "patient_payable_amount"
+    ]
+},
+
+"time_intelligence": {
+    "default_date_column": "bill_date",
+    "supported_granularity": [
+        "day",
+        "week",
+        "month",
+        "quarter",
+        "year"
+    ],
+    "fiscal_year_start": "April"
+},
+
+
+"dimensions": [
+    {
+        "name": "department_name",
+        "display_name": "Department",
+        "description": "Hospital department responsible for billing and revenue generation.",
+        "aliases": ["department", "hospital department", "unit"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 100,
+        "example_values": ["Cardiology", "Neurology", "Orthopedics"]
+    },
+    {
+        "name": "payment_status",
+        "display_name": "Payment Status",
+        "description": "Current payment status of the hospital bill.",
+        "aliases": ["payment", "bill status", "payment state"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 95,
+        "example_values": ["Paid", "Pending", "Partial"]
+    },
+    {
+        "name": "payment_mode",
+        "display_name": "Payment Mode",
+        "description": "Mode used to settle the hospital bill.",
+        "aliases": ["payment method", "mode of payment", "transaction mode"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 90,
+        "example_values": ["Cash", "Card", "UPI", "Insurance"]
+    },
+    {
+        "name": "insurance_flag",
+        "display_name": "Insurance Available",
+        "description": "Indicates whether insurance coverage is available.",
+        "aliases": ["insured", "insurance"],
+        "datatype": "BOOLEAN",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 90,
+        "example_values": ["Yes", "No"]
+    },
+    {
+        "name": "insurance_tier",
+        "display_name": "Insurance Tier",
+        "description": "Coverage tier assigned to the patient's insurance policy.",
+        "aliases": ["insurance level", "coverage tier"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 85,
+        "example_values": ["Gold", "Silver", "Bronze"]
+    },
+    {
+        "name": "charge_type",
+        "display_name": "Charge Type",
+        "description": "Category of billed hospital service.",
+        "aliases": ["billing category", "service charge"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 85,
+        "example_values": ["Consultation", "Pharmacy", "Lab", "Room Charges"]
+    },
+    {
+        "name": "financial_risk",
+        "display_name": "Financial Risk",
+        "description": "Financial risk category assigned to the billing record.",
+        "aliases": ["risk", "risk category"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 80,
+        "example_values": ["Low", "Medium", "High"]
+    },
+    {
+        "name": "payment_priority",
+        "display_name": "Payment Priority",
+        "description": "Priority assigned for payment collection.",
+        "aliases": ["priority", "collection priority"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 80,
+        "example_values": ["High", "Medium", "Low"]
+    },
+    {
+        "name": "revenue_band",
+        "display_name": "Revenue Band",
+        "description": "Revenue category based on total billed amount.",
+        "aliases": ["revenue category", "billing band"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 85,
+        "example_values": ["Low", "Medium", "High"]
+    },
+    {
+        "name": "bill_date",
+        "display_name": "Bill Date",
+        "description": "Date on which the bill was generated.",
+        "aliases": ["billing date", "invoice date"],
+        "datatype": "DATE",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 90,
+        "example_values": ["2025-01-01"]
+    }
+],
+"metrics": [
+    {
+        "name": "total_amount",
+        "display_name": "Total Revenue",
+        "description": "Total billed amount.",
+        "datatype": "REAL",
+        "default_aggregation": "SUM",
+        "unit": "INR",
+        "aliases": ["revenue", "income", "billing", "sales"],
+        "display_format": "currency",
+        "search_weight": 100,
+        "sortable": true
+    },
+    {
+        "name": "insurance_covered_amount",
+        "display_name": "Insurance Coverage Amount",
+        "description": "Amount covered by insurance.",
+        "datatype": "REAL",
+        "default_aggregation": "SUM",
+        "unit": "INR",
+        "aliases": ["covered amount", "insurance payment"],
+        "display_format": "currency",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "patient_payable_amount",
+        "display_name": "Patient Payable Amount",
+        "description": "Amount payable by the patient.",
+        "datatype": "REAL",
+        "default_aggregation": "SUM",
+        "unit": "INR",
+        "aliases": ["patient payment", "self pay"],
+        "display_format": "currency",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "average_revenue",
+        "display_name": "Average Revenue",
+        "description": "Average revenue generated per billing record.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "INR",
+        "aliases": ["avg revenue", "average billing"],
+        "display_format": "currency",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "department_total_revenue",
+        "display_name": "Department Revenue",
+        "description": "Total revenue generated by each department.",
+        "datatype": "REAL",
+        "default_aggregation": "SUM",
+        "unit": "INR",
+        "aliases": ["department income", "department sales"],
+        "display_format": "currency",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "payment_completion_ratio",
+        "display_name": "Payment Completion Ratio",
+        "description": "Percentage of completed payments.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "%",
+        "aliases": ["payment ratio", "completion rate"],
+        "display_format": "percentage",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "insurance_coverage_percentage",
+        "display_name": "Insurance Coverage Percentage",
+        "description": "Percentage of bill covered by insurance.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "%",
+        "aliases": ["coverage percentage", "insurance percent"],
+        "display_format": "percentage",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "patient_payment_percentage",
+        "display_name": "Patient Payment Percentage",
+        "description": "Percentage of bill paid by the patient.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "%",
+        "aliases": ["patient contribution", "self pay percentage"],
+        "display_format": "percentage",
+        "search_weight": 85,
+        "sortable": true
+    },
+    {
+        "name": "revenue_per_day",
+        "display_name": "Revenue Per Day",
+        "description": "Average revenue generated per hospital stay day.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "INR",
+        "aliases": ["daily revenue"],
+        "display_format": "currency",
+        "search_weight": 85,
+        "sortable": true
+    },
+    {
+        "name": "department_revenue_share",
+        "display_name": "Department Revenue Share",
+        "description": "Percentage contribution of a department to total revenue.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "%",
+        "aliases": ["department contribution", "revenue share"],
+        "display_format": "percentage",
+        "search_weight": 85,
+        "sortable": true
+    }
+],
+"default_visualizations": [
+    {
+        "metric": "total_amount",
+        "dimension": "bill_date",
+        "chart": "line_chart",
+        "priority": 1
+    },
+    {
+        "metric": "department_total_revenue",
+        "dimension": "department_name",
+        "chart": "bar_chart",
+        "priority": 2
+    },
+    {
+        "metric": "insurance_coverage_percentage",
+        "dimension": "insurance_tier",
+        "chart": "pie_chart",
+        "priority": 3
+    },
+    {
+        "metric": "payment_completion_ratio",
+        "dimension": "payment_status",
+        "chart": "donut_chart",
+        "priority": 4
+    },
+    {
+        "metric": "revenue_per_day",
+        "dimension": "admission_month",
+        "chart": "line_chart",
+        "priority": 5
+    }
+],
+"ai_context": {
+    "summary": "This dataset contains financial, billing, insurance and revenue analytics related to patient admissions. It should be used for answering questions about hospital revenue, payment performance, insurance coverage, billing analysis and departmental financial performance.",
+
+    "preferred_metrics": [
+        "total_amount",
+        "department_total_revenue",
+        "average_revenue",
+        "insurance_covered_amount",
+        "patient_payable_amount",
+        "payment_completion_ratio",
+        "insurance_coverage_percentage"
+    ],
+
+    "preferred_dimensions": [
+        "department_name",
+        "bill_date",
+        "payment_status",
+        "payment_mode",
+        "insurance_tier",
+        "revenue_band",
+        "financial_risk"
+    ],
+
+    "business_goal": "Analyze hospital financial performance, monitor revenue trends, evaluate insurance utilization and improve payment collection efficiency."
+},
+"sample_questions": [
+    "What is the total revenue?",
+    "Show monthly revenue trends.",
+    "Which department generated the highest revenue?",
+    "Show revenue by department.",
+    "What is the average revenue per admission?",
+    "How much amount was covered by insurance?",
+    "What percentage of revenue comes from insured patients?",
+    "Show payment completion ratio by month.",
+    "Which payment mode generates the highest revenue?",
+    "Compare revenue by payment status.",
+    "Show revenue by insurance tier.",
+    "List high revenue admissions.",
+    "Which departments have the highest financial risk?",
+    "Show insurance coverage percentage by department.",
+    "Compare patient payable amount with insurance covered amount.",
+    "Show revenue by charge type.",
+    "Show revenue by admission season.",
+    "Which revenue band has the most admissions?",
+    "Show department revenue ranking.",
+    "Compare revenue across payment priorities."
+],
+"business_notes": [
+    "Revenue refers to the total billed amount generated from patient admissions.",
+    "Insurance coverage represents the portion of the bill paid by the insurance provider.",
+    "Patient payable amount represents the remaining amount to be paid by the patient.",
+    "Department revenue is used to compare financial performance across hospital departments.",
+    "Payment completion ratio indicates the percentage of successfully completed payments.",
+    "Revenue band categorizes admissions based on billing amount.",
+    "Financial risk is derived using billing behavior, insurance coverage and payment completion.",
+    "Department revenue rank is recalculated whenever new billing records are processed.",
+    "Average revenue represents the mean billing amount across admissions.",
+    "High revenue admissions are identified using predefined business thresholds."
+]
+
+}

@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+
+  "kpis": [
+
+    {
+      "id": "total_revenue",
+      "name": "Total Revenue",
+      "description": "Total revenue generated from patient admissions.",
+      "metric": "total_revenue",
+      "category": "Financial",
+      "priority": "High",
+      "datasets": ["patient", "finance"],
+      "default_visualization": "line_chart",
+      "default_dimension": "admission_date",
+      "trend_analysis": true
+    },
+
+    {
+      "id": "average_revenue",
+      "name": "Average Revenue per Admission",
+      "description": "Average revenue generated for each patient admission.",
+      "metric": "average_revenue",
+      "category": "Financial",
+      "priority": "Medium",
+      "datasets": ["patient", "finance"],
+      "default_visualization": "bar_chart",
+      "default_dimension": "department_name",
+      "trend_analysis": true
+    },
+
+    {
+      "id": "patient_count",
+      "name": "Patient Count",
+      "description": "Total number of unique patients.",
+      "metric": "patient_count",
+      "category": "Patient",
+      "priority": "High",
+      "datasets": ["patient"],
+      "default_visualization": "card",
+      "default_dimension": null,
+      "trend_analysis": true
+    },
+
+    {
+      "id": "admission_count",
+      "name": "Admission Count",
+      "description": "Total number of hospital admissions.",
+      "metric": "admission_count",
+      "category": "Operations",
+      "priority": "High",
+      "datasets": ["patient", "operations"],
+      "default_visualization": "line_chart",
+      "default_dimension": "admission_date",
+      "trend_analysis": true
+    },
+
+    {
+      "id": "average_length_of_stay",
+      "name": "Average Length of Stay",
+      "description": "Average number of days patients stay in the hospital.",
+      "metric": "average_length_of_stay",
+      "category": "Clinical",
+      "priority": "High",
+      "datasets": ["patient"],
+      "default_visualization": "bar_chart",
+      "default_dimension": "department_name",
+      "trend_analysis": true
+    }
+
+  ]
+}

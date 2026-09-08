@@ -1,0 +1,387 @@
+{
+
+    "dataset_info": {
+    "id": "operations",
+    "name": "Hospital Operations Analytics",
+    "description": "Operational analytics for hospital admissions, wards, beds, staffing, shifts and overall hospital resource utilization.",
+    "table": "gold_operations_analytics",
+    "table_type": "gold",
+    "grain": "One record per patient admission",
+    "primary_key": "admission_id",
+    "owner": "MedIntel360",
+    "version": "1.0.0"
+},
+
+"physical_schema": {
+    "columns": [
+        "admission_id",
+        "patient_id",
+        "department_id",
+        "ward_id",
+        "bed_id",
+        "disease_id",
+        "admission_date",
+        "discharge_date",
+        "admission_type",
+        "admission_status",
+        "los",
+        "bill_id",
+        "bill_date",
+        "total_amount",
+        "insurance_covered_amount",
+        "patient_payable_amount",
+        "payment_status",
+        "payment_mode",
+        "gender",
+        "date_of_birth",
+        "blood_group",
+        "city",
+        "contact_number",
+        "insurance_flag",
+        "age",
+        "age_group",
+        "admission_month",
+        "admission_quarter",
+        "admission_weekday",
+        "weekend_admission",
+        "revenue_per_day",
+        "revenue_category",
+        "long_stay_flag",
+        "high_revenue_flag",
+        "senior_citizen_flag",
+        "los_category",
+        "patient_payment_ratio",
+        "insurance_coverage_ratio",
+        "revenue_band",
+        "admission_season",
+        "ward_name",
+        "ward_type",
+        "total_beds",
+        "department_name",
+        "department_type",
+        "floor_number",
+        "status",
+        "bed_number",
+        "bed_status",
+        "staff_count",
+        "doctor_count",
+        "nurse_count",
+        "technician_count",
+        "shift_count",
+        "night_shift_count",
+        "ward_admission_count",
+        "ward_occupancy_rate",
+        "staff_to_bed_ratio",
+        "doctor_to_staff_ratio",
+        "nurse_to_staff_ratio",
+        "technician_to_staff_ratio",
+        "night_shift_percentage",
+        "occupied_bed_flag",
+        "high_workload_ward_flag",
+        "staffing_level",
+        "ward_workload",
+        "shift_load",
+        "night_shift_category",
+        "ward_efficiency"
+    ],
+    "indexes": [
+        "admission_id",
+        "ward_id",
+        "department_id",
+        "admission_date",
+        "ward_name"
+    ],
+    "foreign_keys": []
+},
+
+"relationships": {
+    "joins": [
+        {
+            "dataset": "patient",
+            "local_column": "admission_id",
+            "remote_column": "admission_id",
+            "relationship": "one_to_one"
+        },
+        {
+            "dataset": "finance",
+            "local_column": "admission_id",
+            "remote_column": "admission_id",
+            "relationship": "one_to_one"
+        },
+        {
+            "dataset": "medical",
+            "local_column": "disease_id",
+            "remote_column": "disease_id",
+            "relationship": "many_to_one"
+        }
+    ]
+},
+
+"filters": {
+    "filterable_columns": [
+        "ward_name",
+        "ward_type",
+        "department_name",
+        "department_type",
+        "bed_status",
+        "admission_status",
+        "admission_type",
+        "admission_month",
+        "admission_quarter",
+        "admission_season",
+        "staffing_level",
+        "ward_workload",
+        "shift_load",
+        "night_shift_category",
+        "weekend_admission"
+    ]
+},
+
+"sorting": {
+    "default_sort": {
+        "column": "admission_date",
+        "order": "DESC"
+    },
+    "sortable_columns": [
+        "admission_date",
+        "los",
+        "ward_occupancy_rate",
+        "staff_count",
+        "doctor_count",
+        "nurse_count",
+        "ward_efficiency"
+    ]
+},
+
+"time_intelligence": {
+    "default_date_column": "admission_date",
+    "supported_granularity": [
+        "day",
+        "week",
+        "month",
+        "quarter",
+        "year"
+    ],
+    "fiscal_year_start": "April"
+},
+
+"dimensions": [
+    {
+        "name": "department_name",
+        "display_name": "Department",
+        "description": "Hospital department responsible for patient care.",
+        "aliases": ["department", "hospital department"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 100,
+        "example_values": ["Cardiology", "Neurology", "ICU"]
+    },
+    {
+        "name": "ward_name",
+        "display_name": "Ward",
+        "description": "Hospital ward where the patient was admitted.",
+        "aliases": ["ward", "hospital ward"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 100,
+        "example_values": ["ICU", "General", "Emergency"]
+    },
+    {
+        "name": "ward_type",
+        "display_name": "Ward Type",
+        "description": "Classification of hospital wards.",
+        "aliases": ["ward category"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 90,
+        "example_values": ["ICU", "Semi Private", "General"]
+    },
+    {
+        "name": "bed_status",
+        "display_name": "Bed Status",
+        "description": "Current occupancy status of the bed.",
+        "aliases": ["bed occupancy"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 95,
+        "example_values": ["Occupied", "Available"]
+    },
+    {
+        "name": "staffing_level",
+        "display_name": "Staffing Level",
+        "description": "Operational staffing level assigned to the ward.",
+        "aliases": ["staff level"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 85,
+        "example_values": ["Low", "Normal", "High"]
+    },
+    {
+        "name": "shift_load",
+        "display_name": "Shift Load",
+        "description": "Operational workload for each shift.",
+        "aliases": ["workload"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 85,
+        "example_values": ["Low", "Medium", "High"]
+    }
+],
+
+"metrics": [
+    {
+        "name": "ward_occupancy_rate",
+        "display_name": "Ward Occupancy Rate",
+        "description": "Percentage of occupied beds in the ward.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "%",
+        "aliases": ["occupancy rate", "bed occupancy"],
+        "display_format": "percentage",
+        "search_weight": 100,
+        "sortable": true
+    },
+    {
+        "name": "ward_efficiency",
+        "display_name": "Ward Efficiency",
+        "description": "Operational efficiency score for the ward.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "%",
+        "aliases": ["efficiency"],
+        "display_format": "percentage",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "los",
+        "display_name": "Length of Stay",
+        "description": "Average hospital stay in days.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "Days",
+        "aliases": ["length of stay", "hospital stay"],
+        "display_format": "number",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "staff_count",
+        "display_name": "Staff Count",
+        "description": "Total staff assigned to the ward.",
+        "datatype": "INTEGER",
+        "default_aggregation": "AVG",
+        "unit": "Staff",
+        "aliases": ["employees"],
+        "display_format": "number",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "doctor_count",
+        "display_name": "Doctor Count",
+        "description": "Total doctors assigned to the ward.",
+        "datatype": "INTEGER",
+        "default_aggregation": "AVG",
+        "unit": "Doctors",
+        "aliases": ["physicians"],
+        "display_format": "number",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "nurse_count",
+        "display_name": "Nurse Count",
+        "description": "Total nurses assigned to the ward.",
+        "datatype": "INTEGER",
+        "default_aggregation": "AVG",
+        "unit": "Nurses",
+        "aliases": ["nursing staff"],
+        "display_format": "number",
+        "search_weight": 90,
+        "sortable": true
+    }
+],
+
+"default_visualizations": [
+    {
+        "metric": "ward_occupancy_rate",
+        "dimension": "ward_name",
+        "chart": "bar_chart",
+        "priority": 1
+    },
+    {
+        "metric": "los",
+        "dimension": "department_name",
+        "chart": "bar_chart",
+        "priority": 2
+    },
+    {
+        "metric": "ward_efficiency",
+        "dimension": "ward_name",
+        "chart": "line_chart",
+        "priority": 3
+    }
+],
+
+"ai_context": {
+    "summary": "This dataset focuses on hospital operations including admissions, bed utilization, ward occupancy, staffing, operational efficiency and resource allocation.",
+    "preferred_metrics": [
+        "ward_occupancy_rate",
+        "ward_efficiency",
+        "los",
+        "staff_count"
+    ],
+    "preferred_dimensions": [
+        "department_name",
+        "ward_name",
+        "ward_type",
+        "bed_status",
+        "staffing_level"
+    ],
+    "business_goal": "Monitor hospital operations, improve resource utilization and optimize patient flow."
+},
+
+"sample_questions": [
+    "Which ward has the highest occupancy rate?",
+    "Show ward occupancy by department.",
+    "Average length of stay by ward.",
+    "Compare ward efficiency across departments.",
+    "Show staffing levels by ward.",
+    "Which wards have high workload?",
+    "Average doctor count by department.",
+    "Show nurse distribution across wards.",
+    "Bed occupancy trend by month.",
+    "Weekend vs weekday admissions.",
+    "Show admissions by ward.",
+    "Which department has the highest LOS?",
+    "Show ward efficiency trend.",
+    "Compare staffing ratios across wards.",
+    "List wards with low occupancy."
+],
+
+"business_notes": [
+    "Ward occupancy rate measures bed utilization.",
+    "Ward efficiency is a derived operational performance score.",
+    "Length of stay is calculated as discharge date minus admission date.",
+    "Staffing level indicates workforce adequacy.",
+    "Shift load reflects operational workload during a shift.",
+    "Night shift percentage helps analyze workforce distribution.",
+    "Occupied bed flag identifies beds currently in use.",
+    "High workload wards require operational attention."
+]
+
+
+}

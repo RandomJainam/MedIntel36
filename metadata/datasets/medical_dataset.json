@@ -1,0 +1,429 @@
+{
+
+"dataset_info": {
+    "id": "medical",
+    "name": "Medical Analytics",
+    "description": "Clinical analytics covering diseases, diagnostics, laboratory tests, prescriptions, medications and doctor performance.",
+    "table": "gold_medical_analytics",
+    "table_type": "gold",
+    "grain": "One record per patient admission with associated clinical activities",
+    "primary_key": "patient_diagnostic_id",
+    "owner": "MedIntel360",
+    "version": "1.0.0"
+},
+
+"physical_schema": {
+    "columns": [
+        "admission_id",
+        "patient_id",
+        "department_id_x",
+        "ward_id",
+        "bed_id",
+        "disease_id",
+        "admission_date",
+        "discharge_date",
+        "admission_type",
+        "admission_status",
+        "los",
+        "bill_id",
+        "bill_date",
+        "total_amount",
+        "insurance_covered_amount",
+        "patient_payable_amount",
+        "payment_status",
+        "payment_mode",
+        "gender_x",
+        "date_of_birth",
+        "blood_group",
+        "city",
+        "contact_number",
+        "insurance_flag",
+        "age",
+        "age_group",
+        "admission_month",
+        "admission_quarter",
+        "admission_weekday",
+        "weekend_admission",
+        "revenue_per_day",
+        "revenue_category",
+        "long_stay_flag",
+        "high_revenue_flag",
+        "senior_citizen_flag",
+        "los_category",
+        "patient_payment_ratio",
+        "insurance_coverage_ratio",
+        "revenue_band",
+        "admission_season",
+        "disease_name",
+        "disease_category",
+        "patient_diagnostic_id",
+        "test_date",
+        "result_status",
+        "test_id",
+        "doctor_id",
+        "test_name",
+        "test_category",
+        "standard_cost",
+        "prescription_id",
+        "dosage",
+        "frequency",
+        "duration_days",
+        "drug_id",
+        "drug_name",
+        "brand_name",
+        "drug_category",
+        "unit_cost",
+        "manufacturer_id",
+        "employee_id",
+        "employee_name",
+        "gender_y",
+        "role",
+        "department_id",
+        "specialization",
+        "qualification",
+        "experience_years",
+        "disease_case_count",
+        "test_usage_count",
+        "drug_usage_count",
+        "doctor_patient_count",
+        "average_los_by_disease",
+        "average_revenue_by_disease",
+        "high_volume_disease_flag"
+    ],
+    "indexes": [
+        "patient_diagnostic_id",
+        "doctor_id",
+        "disease_id",
+        "test_id",
+        "drug_id"
+    ],
+    "foreign_keys": []
+},
+
+"relationships": {
+    "joins": [
+        {
+            "dataset": "patient",
+            "local_column": "admission_id",
+            "remote_column": "admission_id",
+            "relationship": "one_to_one"
+        },
+        {
+            "dataset": "finance",
+            "local_column": "bill_id",
+            "remote_column": "bill_id",
+            "relationship": "one_to_one"
+        },
+        {
+            "dataset": "operations",
+            "local_column": "ward_id",
+            "remote_column": "ward_id",
+            "relationship": "many_to_one"
+        }
+    ]
+},
+
+"filters": {
+    "filterable_columns": [
+        "disease_name",
+        "disease_category",
+        "test_category",
+        "result_status",
+        "drug_category",
+        "specialization",
+        "qualification",
+        "role",
+        "admission_type",
+        "admission_status"
+    ]
+},
+
+"sorting": {
+    "default_sort": {
+        "column": "test_date",
+        "order": "DESC"
+    },
+    "sortable_columns": [
+        "test_date",
+        "average_los_by_disease",
+        "average_revenue_by_disease",
+        "doctor_patient_count",
+        "disease_case_count"
+    ]
+},
+
+"time_intelligence": {
+    "default_date_column": "test_date",
+    "supported_granularity": [
+        "day",
+        "week",
+        "month",
+        "quarter",
+        "year"
+    ],
+    "fiscal_year_start": "April"
+},
+
+"dimensions": [
+    {
+        "name": "disease_name",
+        "display_name": "Disease",
+        "description": "Primary diagnosed disease.",
+        "aliases": ["diagnosis", "condition", "illness"],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 100,
+        "example_values": [
+            "Diabetes",
+            "Hypertension",
+            "Pneumonia"
+        ]
+    },
+    {
+        "name": "disease_category",
+        "display_name": "Disease Category",
+        "description": "Clinical classification of diseases.",
+        "aliases": [
+            "category"
+        ],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 95,
+        "example_values": [
+            "Cardiology",
+            "Neurology"
+        ]
+    },
+    {
+        "name": "test_name",
+        "display_name": "Diagnostic Test",
+        "description": "Medical diagnostic test performed.",
+        "aliases": [
+            "lab test",
+            "investigation"
+        ],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 95,
+        "example_values": [
+            "CBC",
+            "MRI",
+            "CT Scan"
+        ]
+    },
+    {
+        "name": "drug_name",
+        "display_name": "Drug",
+        "description": "Prescribed medication.",
+        "aliases": [
+            "medicine",
+            "medication"
+        ],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 90,
+        "example_values": [
+            "Paracetamol",
+            "Metformin"
+        ]
+    },
+    {
+        "name": "employee_name",
+        "display_name": "Doctor",
+        "description": "Medical professional responsible for treatment.",
+        "aliases": [
+            "doctor",
+            "physician",
+            "consultant"
+        ],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 100,
+        "example_values": [
+            "Dr. Sharma"
+        ]
+    },
+    {
+        "name": "specialization",
+        "display_name": "Specialization",
+        "description": "Doctor's medical specialization.",
+        "aliases": [
+            "speciality"
+        ],
+        "datatype": "TEXT",
+        "filterable": true,
+        "groupable": true,
+        "sortable": true,
+        "search_weight": 90,
+        "example_values": [
+            "Cardiology",
+            "Orthopedics"
+        ]
+    }
+],
+"metrics": [
+    {
+        "name": "disease_case_count",
+        "display_name": "Disease Case Count",
+        "description": "Total number of diagnosed cases.",
+        "datatype": "INTEGER",
+        "default_aggregation": "SUM",
+        "unit": "Cases",
+        "aliases": [
+            "cases"
+        ],
+        "display_format": "number",
+        "search_weight": 100,
+        "sortable": true
+    },
+    {
+        "name": "doctor_patient_count",
+        "display_name": "Doctor Patient Count",
+        "description": "Patients treated by each doctor.",
+        "datatype": "INTEGER",
+        "default_aggregation": "SUM",
+        "unit": "Patients",
+        "aliases": [
+            "doctor workload"
+        ],
+        "display_format": "number",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "average_los_by_disease",
+        "display_name": "Average LOS",
+        "description": "Average hospital stay for each disease.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "Days",
+        "aliases": [
+            "average stay"
+        ],
+        "display_format": "number",
+        "search_weight": 95,
+        "sortable": true
+    },
+    {
+        "name": "average_revenue_by_disease",
+        "display_name": "Average Revenue",
+        "description": "Average revenue generated per disease.",
+        "datatype": "REAL",
+        "default_aggregation": "AVG",
+        "unit": "INR",
+        "aliases": [
+            "average billing"
+        ],
+        "display_format": "currency",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "test_usage_count",
+        "display_name": "Test Usage Count",
+        "description": "Number of diagnostic tests performed.",
+        "datatype": "INTEGER",
+        "default_aggregation": "SUM",
+        "unit": "Tests",
+        "aliases": [
+            "tests performed"
+        ],
+        "display_format": "number",
+        "search_weight": 90,
+        "sortable": true
+    },
+    {
+        "name": "drug_usage_count",
+        "display_name": "Drug Usage Count",
+        "description": "Number of prescribed medications.",
+        "datatype": "INTEGER",
+        "default_aggregation": "SUM",
+        "unit": "Prescriptions",
+        "aliases": [
+            "drug prescriptions"
+        ],
+        "display_format": "number",
+        "search_weight": 90,
+        "sortable": true
+    }
+],
+
+"default_visualizations": [
+    {
+        "metric": "disease_case_count",
+        "dimension": "disease_name",
+        "chart": "bar_chart",
+        "priority": 1
+    },
+    {
+        "metric": "doctor_patient_count",
+        "dimension": "employee_name",
+        "chart": "bar_chart",
+        "priority": 2
+    },
+    {
+        "metric": "average_los_by_disease",
+        "dimension": "disease_name",
+        "chart": "line_chart",
+        "priority": 3
+    }
+],
+
+"ai_context": {
+    "summary": "This dataset contains clinical analytics covering diseases, laboratory tests, prescriptions, medications, doctors and treatment performance.",
+    "preferred_metrics": [
+        "disease_case_count",
+        "doctor_patient_count",
+        "average_los_by_disease",
+        "average_revenue_by_disease"
+    ],
+    "preferred_dimensions": [
+        "disease_name",
+        "test_name",
+        "drug_name",
+        "employee_name",
+        "specialization"
+    ],
+    "business_goal": "Analyze disease trends, clinical performance, diagnostic utilization and treatment effectiveness."
+},
+
+"sample_questions": [
+    "Which disease has the highest number of cases?",
+    "Average LOS by disease.",
+    "Average revenue by disease.",
+    "Most frequently prescribed drugs.",
+    "Most commonly performed diagnostic tests.",
+    "Doctor workload by specialization.",
+    "Patients treated by each doctor.",
+    "Disease distribution by department.",
+    "Drug usage by disease.",
+    "Test utilization trend.",
+    "Average LOS by doctor.",
+    "Most experienced doctors.",
+    "Disease category distribution.",
+    "High volume diseases.",
+    "Compare doctor performance."
+],
+
+"business_notes": [
+    "Disease case count measures the prevalence of diagnosed diseases.",
+    "Average LOS by disease helps evaluate treatment efficiency.",
+    "Average revenue by disease indicates the financial impact of different conditions.",
+    "Doctor patient count is used to monitor physician workload.",
+    "Diagnostic test usage helps evaluate laboratory demand.",
+    "Drug usage identifies medication prescribing patterns.",
+    "High volume disease flag identifies frequently occurring diseases.",
+    "Clinical analytics should be interpreted alongside patient and operational metrics."
+]
+
+}

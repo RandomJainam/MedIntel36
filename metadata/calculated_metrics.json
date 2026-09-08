@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+
+  "metrics": [
+
+    {
+      "id": "total_revenue",
+      "name": "Total Revenue",
+      "description": "Total revenue generated from patient admissions.",
+      "formula": "SUM(total_amount)",
+      "return_type": "REAL",
+      "unit": "INR",
+      "datasets": ["patient", "finance"],
+      "groupable": true
+    },
+
+    {
+      "id": "average_revenue",
+      "name": "Average Revenue",
+      "description": "Average revenue generated per admission.",
+      "formula": "AVG(total_amount)",
+      "return_type": "REAL",
+      "unit": "INR",
+      "datasets": ["patient", "finance"],
+      "groupable": true
+    },
+
+    {
+      "id": "patient_count",
+      "name": "Patient Count",
+      "description": "Total number of unique patients.",
+      "formula": "COUNT(DISTINCT patient_id)",
+      "return_type": "INTEGER",
+      "unit": "Patients",
+      "datasets": ["patient"],
+      "groupable": true
+    },
+
+    {
+      "id": "admission_count",
+      "name": "Admission Count",
+      "description": "Total number of admissions.",
+      "formula": "COUNT(admission_id)",
+      "return_type": "INTEGER",
+      "unit": "Admissions",
+      "datasets": ["patient", "operations"],
+      "groupable": true
+    },
+
+    {
+      "id": "average_length_of_stay",
+      "name": "Average Length of Stay",
+      "description": "Average number of days patients stay in the hospital.",
+      "formula": "AVG(los)",
+      "return_type": "REAL",
+      "unit": "Days",
+      "datasets": ["patient"],
+      "groupable": true
+    },
+
+    {
+      "id": "maximum_length_of_stay",
+      "name": "Maximum Length of Stay",
+      "description": "Longest hospital stay recorded.",
+      "formula": "MAX(los)",
+      "return_type": "REAL",
+      "unit": "Days",
+      "datasets": ["patient"],
+      "groupable": false
+    },
+
+    {
+      "id": "minimum_length_of_stay",
+      "name": "Minimum Length of Stay",
+      "description": "Shortest hospital stay recorded.",
+      "formula": "MIN(los)",
+      "return_type": "REAL",
+      "unit": "Days",
+      "datasets": ["patient"],
+      "groupable": false
+    }
+
+  ]
+}
